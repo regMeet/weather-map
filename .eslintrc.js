@@ -19,7 +19,7 @@ module.exports = {
   plugins: ['react', '@typescript-eslint'],
   rules: {
     'react/react-in-jsx-scope': 'off',
-    'react/jsx-filename-extension': [1, { extensions: ['.tsx', '.ts'] }],
+    'react/jsx-filename-extension': [1, { extensions: ['.tsx', '.ts', '.jsx', '.js'] }],
     'import/extensions': [
       'error',
       'ignorePackages',
@@ -31,6 +31,10 @@ module.exports = {
       }
     ],
     'object-curly-newline': 'off',
+    // 'import/no-default-export': 'error',
+    'react/require-default-props': 'off',
+    'import/prefer-default-export': 0,
+    'spaced-comment': [2, 'always'],
     'comma-dangle': 'off',
     '@typescript-eslint/comma-dangle': [
       'error',
@@ -41,6 +45,8 @@ module.exports = {
         exports: 'never',
         functions: 'never'
       }
-    ]
+    ],
+    'react/function-component-definition': 0,
+    'react/prop-types': 0
   }
 };

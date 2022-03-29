@@ -1,6 +1,7 @@
 import React from 'react';
 import { Flex, Button, Text, Box } from '@chakra-ui/react';
 import useGeolocation from 'react-navigator-geolocation';
+import { MapCurrentLocation } from '../../Components/Map/CurrentLocation';
 
 function HomePage() {
   const { isAvailable, isEnabled, coords, suppressRequest } = useGeolocation({
@@ -27,6 +28,7 @@ function HomePage() {
     <Box>
       <Text fontSize="2xl">Coordinates granted</Text>
       <Text fontSize="xl">{`${coords?.latitude}, ${coords?.longitude}`}</Text>
+      <MapCurrentLocation lat={coords?.latitude!} lng={coords?.longitude!} />
     </Box>
   );
 }
