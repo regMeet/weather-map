@@ -47,6 +47,7 @@ module.exports = {
       }
     ],
     'react/function-component-definition': 0,
-    'react/prop-types': 0
+    'react/prop-types': 0,
+    'react/jsx-one-expression-per-line': 'off'
   }
 };

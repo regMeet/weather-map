@@ -1,41 +1,65 @@
-import GoogleMap, { Coords } from 'google-map-react';
-import { Box, Flex, Text } from '@chakra-ui/react';
+import { useState, useCallback } from 'react';
+import Map, { Marker, NavigationControl } from 'react-map-gl';
+import type { MarkerDragEvent, LngLat } from 'react-map-gl';
+import { Box } from '@chakra-ui/react';
 
-interface MarkerProps extends Coords {
-  text: string;
-}
-
-const Marker = ({ text }: MarkerProps) => (
-  <Flex>
-    <Box bg="tomato" borderRadius="10px">
-      <Text fontSize="xl">{text}</Text>
-    </Box>
-  </Flex>
-);
+import ControlPanel from './ControlPanel';
+import Pin from './Pin';
 
 interface MapProps {
   lat: number;
   lng: number;
-  locations?: MarkerProps[];
 }
 
-// TODO: pass default values
-export function MapCurrentLocation({ lat, lng, locations = [] }: MapProps) {
+export function MapCurrentLocation({ lat, lng }: MapProps) {
+  const viewPort = {
+    latitude: lat,
+    longitude: lng,
+    zoom: 14
+  };
+
+  const [marker, setMarker] = useState({
+    latitude: lat,
+    longitude: lng
+  });
+
+  const [events, logEvents] = useState<Record<string, LngLat>>({});
+
+  const onMarkerDragStart = useCallback((event: MarkerDragEvent) => {
+    logEvents((_events) => ({ ..._events, onDragStart: event.lngLat }));
+  }, []);
+
+  const onMarkerDrag = useCallback((event: MarkerDragEvent) => {
+    logEvents((_events) => ({ ..._events, onDrag: event.lngLat }));
+
+    setMarker({
+      longitude: event.lngLat.lng,
+      latitude: event.lngLat.lat
+    });
+  }, []);
+
+  const onMarkerDragEnd = useCallback((event: MarkerDragEvent) => {
+    logEvents((_events) => ({ ..._events, onDragEnd: event.lngLat }));
+  }, []);
+
   return (
-    // Important! Always set the container height explicitly
     <Box w="500px" h="500px">
-      <div style={{ width: '100%', height: '100%' }}>
-        <GoogleMap
-          bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY! }}
-          defaultCenter={{ lat, lng }}
-          defaultZoom={12}
+      <Map initialViewState={viewPort} mapStyle="mapbox://styles/mapbox/dark-v9">
+        <Marker
+          latitude={marker.latitude}
+          longitude={marker.longitude}
+          anchor="bottom"
+          draggable
+          onDragStart={onMarkerDragStart}
+          onDrag={onMarkerDrag}
+          onDragEnd={onMarkerDragEnd}
         >
-          <Marker lat={lat} lng={lng} text="A place" />
-          {locations?.map((coords) => (
-            <Marker lat={coords.lat} lng={coords.lng} text={coords.text} />
-          ))}
-        </GoogleMap>
-      </div>
+          <Pin size={20} />
+        </Marker>
+
+        <NavigationControl />
+      </Map>
+      <ControlPanel events={events} />
     </Box>
   );
 }
