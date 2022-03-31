@@ -3,10 +3,10 @@ import { Flex, Button, Text } from '@chakra-ui/react';
 import useGeolocation from 'react-navigator-geolocation';
 
 interface GetGeoLocationProps {
-  updateLocation: ({ lat, lng }) => void;
+  setCurrentLocation: ({ lat, lng }) => void;
 }
 
-export function GetGeoLocation({ updateLocation }: GetGeoLocationProps) {
+export function GetGeoLocation({ setCurrentLocation }: GetGeoLocationProps) {
   const { isAvailable, isEnabled, coords, suppressRequest } = useGeolocation({
     suppressOnMount: false,
     positionOptions: { enableHighAccuracy: false, timeout: 5000, maximumAge: 0 }
@@ -14,7 +14,7 @@ export function GetGeoLocation({ updateLocation }: GetGeoLocationProps) {
 
   useEffect(() => {
     if (coords) {
-      updateLocation({ lat: coords.latitude, lng: coords.longitude });
+      setCurrentLocation({ lat: coords.latitude, lng: coords.longitude });
     }
   }, [coords]);
 

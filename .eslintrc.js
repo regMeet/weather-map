@@ -48,6 +48,14 @@ module.exports = {
     ],
     'react/function-component-definition': 0,
     'react/prop-types': 0,
-    'react/jsx-one-expression-per-line': 'off'
+    'react/jsx-one-expression-per-line': 'off',
+    'react/jsx-props-no-spreading': [
+      2,
+      {
+        html: 'enforce',
+        custom: 'ignore',
+        explicitSpread: 'enforce'
+      }
+    ]
   }
 };

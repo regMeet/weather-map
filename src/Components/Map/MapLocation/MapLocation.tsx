@@ -7,17 +7,25 @@ import ControlPanel from './ControlPanel';
 import Pin from '../Pin';
 
 interface MapLocationProps {
-  lat: number;
-  lng: number;
-  updateLocation: ({ lat, lng }) => void;
+  location: {
+    lat: number;
+    lng: number;
+  };
+  updateLocation?: ({ lat, lng }) => void;
+  draggable?: boolean;
   debug?: boolean;
 }
 
-export function MapLocation({ lat, lng, updateLocation, debug = false }: MapLocationProps) {
+export function MapLocation({
+  location: { lat, lng },
+  updateLocation,
+  draggable = false,
+  debug = false
+}: MapLocationProps) {
   const viewPort = {
     latitude: lat,
     longitude: lng,
-    zoom: 14
+    zoom: 13
   };
 
   const [marker, setMarker] = useState({
@@ -43,17 +51,22 @@ export function MapLocation({ lat, lng, updateLocation, debug = false }: MapLoca
   const onMarkerDragEnd = useCallback((event: MarkerDragEvent) => {
     logEvents((_events) => ({ ..._events, onDragEnd: event.lngLat }));
 
-    updateLocation({ lat: event.lngLat.lat, lng: event.lngLat.lng });
+    updateLocation?.({ lat: event.lngLat.lat, lng: event.lngLat.lng });
   }, []);
 
   return (
-    <Box w="50%" h="50vh">
-      <Map initialViewState={viewPort} mapStyle="mapbox://styles/mapbox/dark-v9">
+    <Box w="55%" h="80vh" zIndex={2}>
+      <Map
+        initialViewState={viewPort}
+        mapStyle="mapbox://styles/mapbox/dark-v9"
+        latitude={viewPort.latitude}
+        longitude={viewPort.longitude}
+      >
         <Marker
           latitude={marker.latitude}
           longitude={marker.longitude}
           anchor="bottom"
-          draggable
+          draggable={draggable}
           onDragStart={onMarkerDragStart}
           onDrag={onMarkerDrag}
           onDragEnd={onMarkerDragEnd}

@@ -7,11 +7,13 @@ import { searchWeather } from '../../api/WeatherService';
 import { getRandomPhotoFromLocation } from '../../api/PhotoService';
 
 interface WeatherProps {
-  lat: number;
-  lng: number;
+  location: {
+    lat: number;
+    lng: number;
+  };
 }
 
-interface LocationWeather extends WeatherProps {
+interface LocationWeather {
   city: string;
   temperatureC: number;
   minTemp: number;
@@ -22,7 +24,7 @@ interface LocationWeather extends WeatherProps {
   photo: string;
 }
 
-export function Weather({ lat, lng }: WeatherProps) {
+export function Weather({ location: { lat, lng } }: WeatherProps) {
   const [location, setLocation] = useState('');
   const [weather, setWeather] = useState<LocationWeather>();
 
@@ -36,8 +38,6 @@ export function Weather({ lat, lng }: WeatherProps) {
       const photo = await getRandomPhotoFromLocation(geolocation);
 
       setWeather({
-        lat,
-        lng,
         city: fetchedWeather.name || location,
         temperatureC: Math.round(fetchedWeather.main.temp),
         minTemp: Math.round(fetchedWeather.main.temp_min),
@@ -70,7 +70,7 @@ export function Weather({ lat, lng }: WeatherProps) {
         <Text fontSize="xl">Sunrise: {weather.sunrise}</Text>
         <Text fontSize="xl">Sunset: {weather.sunset}</Text>
         <Text>
-          <Image src={weather.photo} alt="city photo" boxSize="330px" objectFit="cover" />
+          <Image src={weather.photo} alt="city photo" boxSize="380px" objectFit="cover" />
         </Text>
       </Box>
     </Flex>

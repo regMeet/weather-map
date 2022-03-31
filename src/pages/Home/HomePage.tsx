@@ -1,47 +1,51 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Box, Button, Flex, Text } from '@chakra-ui/react';
 
 import { MapLocation } from '../../Components/Map/MapLocation';
 import { Weather } from '../../Components/Weather';
+import { SearchLocation } from '../../Components/SearchLocation';
 import { GetGeoLocation } from '../../Components/Map/GetGeoLocation';
-
-interface Location {
-  lat: number;
-  lng: number;
-}
+import { GeoLocation } from '../../api/types';
 
 export function HomePage() {
-  const [location, setLocation] = useState<Location | null>(null);
-  const [currentLocation, setCurrentLocation] = useState<Location | null>(null);
-
-  useEffect(() => {
-    if (currentLocation) {
-      setLocation(currentLocation);
-    }
-  }, [currentLocation]);
-
-  if (!location) {
-    return <GetGeoLocation updateLocation={setCurrentLocation} />;
-  }
-
-  const { lat, lng } = location;
-
-  // show current location
-  // search location
-
-  // show current weather
-  // show forecast weather
+  const [currentLocation, setCurrentLocation] = useState<GeoLocation | null>(null);
+  const [location, setLocation] = useState<GeoLocation | null>(null);
 
   return (
-    <Box>
-      <Button colorScheme="blue" width="200px" onClick={() => setLocation(currentLocation)}>
-        <Text fontSize="lg">Current location</Text>
-      </Button>
+    <Flex>
+      <Box width="50%">
+        <Flex>
+          <GetGeoLocation setCurrentLocation={setCurrentLocation} />
+          <Button
+            colorScheme="blue"
+            width="200px"
+            onClick={() => setCurrentLocation(currentLocation)}
+          >
+            <Text fontSize="lg">Current location</Text>
+          </Button>
+        </Flex>
 
-      <Flex>
-        <MapLocation lat={lat} lng={lng} updateLocation={setLocation} />
-        <Weather lat={lat} lng={lng} />
-      </Flex>
-    </Box>
+        {currentLocation && (
+          <Flex>
+            <MapLocation location={currentLocation} />
+            <Weather location={currentLocation} />
+          </Flex>
+        )}
+      </Box>
+
+      <Box width="50%">
+        {/* z-index not working */}
+        <Box zIndex={50}>
+          <SearchLocation updateLocation={setLocation} />
+        </Box>
+
+        {location && (
+          <Flex zIndex={1}>
+            <MapLocation location={location} updateLocation={setLocation} draggable />
+            <Weather location={location} />
+          </Flex>
+        )}
+      </Box>
+    </Flex>
   );
 }
