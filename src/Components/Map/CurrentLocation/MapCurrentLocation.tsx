@@ -4,7 +4,7 @@ import type { MarkerDragEvent, LngLat } from 'react-map-gl';
 import { Box } from '@chakra-ui/react';
 
 import ControlPanel from './ControlPanel';
-import Pin from './Pin';
+import Pin from '../Pin';
 
 interface MapProps {
   lat: number;
