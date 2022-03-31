@@ -14,7 +14,8 @@ interface WeatherProps {
 interface LocationWeather extends WeatherProps {
   city: string;
   temperatureC: number;
-  temperatureF: number;
+  minTemp: number;
+  maxTemp: number;
   icon: string;
   sunrise: string;
   sunset: string;
@@ -30,19 +31,20 @@ export function Weather({ lat, lng }: WeatherProps) {
       const geolocation = await getLocationFromCoords({ lat, lng });
       setLocation(geolocation);
 
-      const weather1 = await searchWeather({ lat, lng });
+      const fetchedWeather = await searchWeather({ lat, lng });
 
       const photo = await getRandomPhotoFromLocation(geolocation);
 
       setWeather({
         lat,
         lng,
-        city: weather1.name || location,
-        temperatureC: Math.round(weather1.main.temp),
-        temperatureF: Math.round(weather1.main.temp * 1.8 + 32),
-        icon: weather1.weather[0].icon,
-        sunrise: moment.unix(weather1.sys.sunrise).format('hh:mm a'),
-        sunset: moment.unix(weather1.sys.sunset).format('hh:mm a'),
+        city: fetchedWeather.name || location,
+        temperatureC: Math.round(fetchedWeather.main.temp),
+        minTemp: Math.round(fetchedWeather.main.temp_min),
+        maxTemp: Math.round(fetchedWeather.main.temp_max),
+        icon: fetchedWeather.weather[0].icon,
+        sunrise: moment.unix(fetchedWeather.sys.sunrise).format('hh:mm a'),
+        sunset: moment.unix(fetchedWeather.sys.sunset).format('hh:mm a'),
         photo
       });
     }
@@ -60,7 +62,7 @@ export function Weather({ lat, lng }: WeatherProps) {
       <Box>
         <Text fontSize="2xl">{weather.city}</Text>
         <Text fontSize="xl">
-          {weather.temperatureC} / {weather.temperatureF}
+          {weather.temperatureC}°C ({weather.minTemp}°c - {weather.maxTemp}°c)
         </Text>
         <Text>
           <Image src={`http://openweathermap.org/img/w/${weather.icon}.png`} alt="weather icon" />

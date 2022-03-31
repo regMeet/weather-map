@@ -1,36 +1,47 @@
-import React from 'react';
-import { Flex, Button, Text } from '@chakra-ui/react';
-import useGeolocation from 'react-navigator-geolocation';
-import { MapCurrentLocation } from '../../Components/Map/CurrentLocation';
+import { useEffect, useState } from 'react';
+import { Box, Button, Flex, Text } from '@chakra-ui/react';
+
+import { MapLocation } from '../../Components/Map/MapLocation';
 import { Weather } from '../../Components/Weather';
+import { GetGeoLocation } from '../../Components/Map/GetGeoLocation';
 
-function HomePage() {
-  const { isAvailable, isEnabled, coords, suppressRequest } = useGeolocation({
-    suppressOnMount: false,
-    positionOptions: { enableHighAccuracy: false, timeout: 5000, maximumAge: 0 }
-  });
-
-  if (!isAvailable) {
-    // Your browser doesn't support Geolocation API
-    return null;
-  }
-
-  if (!isEnabled) {
-    return (
-      <Flex className="HomePage" direction="column">
-        <Button colorScheme="blue" width="200px" onClick={() => suppressRequest(false)}>
-          <Text fontSize="lg">Get current location</Text>
-        </Button>
-      </Flex>
-    );
-  }
-
-  return (
-    <Flex>
-      <MapCurrentLocation lat={coords?.latitude!} lng={coords?.longitude!} />
-      <Weather lat={coords?.latitude!} lng={coords?.longitude!} />
-    </Flex>
-  );
+interface Location {
+  lat: number;
+  lng: number;
 }
 
-export default HomePage;
+export function HomePage() {
+  const [location, setLocation] = useState<Location | null>(null);
+  const [currentLocation, setCurrentLocation] = useState<Location | null>(null);
+
+  useEffect(() => {
+    if (currentLocation) {
+      setLocation(currentLocation);
+    }
+  }, [currentLocation]);
+
+  if (!location) {
+    return <GetGeoLocation updateLocation={setCurrentLocation} />;
+  }
+
+  const { lat, lng } = location;
+
+  // show current location
+  // search location
+
+  // show current weather
+  // show forecast weather
+
+  return (
+    <Box>
+      <Button colorScheme="blue" width="200px" onClick={() => setLocation(currentLocation)}>
+        <Text fontSize="lg">Current location</Text>
+      </Button>
+
+      <Flex>
+        <MapLocation lat={lat} lng={lng} updateLocation={setLocation} />
+        <Weather lat={lat} lng={lng} />
+      </Flex>
+    </Box>
+  );
+}

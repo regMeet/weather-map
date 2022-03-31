@@ -6,12 +6,14 @@ import { Box } from '@chakra-ui/react';
 import ControlPanel from './ControlPanel';
 import Pin from '../Pin';
 
-interface MapProps {
+interface MapLocationProps {
   lat: number;
   lng: number;
+  updateLocation: ({ lat, lng }) => void;
+  debug?: boolean;
 }
 
-export function MapCurrentLocation({ lat, lng }: MapProps) {
+export function MapLocation({ lat, lng, updateLocation, debug = false }: MapLocationProps) {
   const viewPort = {
     latitude: lat,
     longitude: lng,
@@ -33,17 +35,19 @@ export function MapCurrentLocation({ lat, lng }: MapProps) {
     logEvents((_events) => ({ ..._events, onDrag: event.lngLat }));
 
     setMarker({
-      longitude: event.lngLat.lng,
-      latitude: event.lngLat.lat
+      latitude: event.lngLat.lat,
+      longitude: event.lngLat.lng
     });
   }, []);
 
   const onMarkerDragEnd = useCallback((event: MarkerDragEvent) => {
     logEvents((_events) => ({ ..._events, onDragEnd: event.lngLat }));
+
+    updateLocation({ lat: event.lngLat.lat, lng: event.lngLat.lng });
   }, []);
 
   return (
-    <Box w="500px" h="500px">
+    <Box w="50%" h="50vh">
       <Map initialViewState={viewPort} mapStyle="mapbox://styles/mapbox/dark-v9">
         <Marker
           latitude={marker.latitude}
@@ -59,7 +63,7 @@ export function MapCurrentLocation({ lat, lng }: MapProps) {
 
         <NavigationControl />
       </Map>
-      <ControlPanel events={events} />
+      {debug && <ControlPanel events={events} />}
     </Box>
   );
 }

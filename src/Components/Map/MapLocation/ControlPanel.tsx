@@ -19,7 +19,7 @@ function ControlPanel(props: { events: Record<string, LngLat> }) {
           return (
             <div key={eventName}>
               <strong>{eventName}:</strong>{' '}
-              {lngLat ? `${round5(lngLat.lng)}, ${round5(lngLat.lat)}` : <em>null</em>}
+              {lngLat ? `${round5(lngLat.lat)}, ${round5(lngLat.lng)}` : <em>null</em>}
             </div>
           );
         })}
