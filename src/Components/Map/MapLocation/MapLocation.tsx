@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import Map, { Marker, NavigationControl } from 'react-map-gl';
 import type { MarkerDragEvent, LngLat } from 'react-map-gl';
 import { Box } from '@chakra-ui/react';
@@ -22,16 +22,17 @@ export function MapLocation({
   draggable = false,
   debug = false
 }: MapLocationProps) {
-  const viewPort = {
-    latitude: lat,
-    longitude: lng,
-    zoom: 13
-  };
-
   const [marker, setMarker] = useState({
     latitude: lat,
     longitude: lng
   });
+
+  useEffect(() => {
+    setMarker({
+      latitude: lat,
+      longitude: lng
+    });
+  }, [lat, lng]);
 
   const [events, logEvents] = useState<Record<string, LngLat>>({});
 
@@ -54,8 +55,15 @@ export function MapLocation({
     updateLocation?.({ lat: event.lngLat.lat, lng: event.lngLat.lng });
   }, []);
 
+  // TODO: useMemo
+  const viewPort = {
+    latitude: lat,
+    longitude: lng,
+    zoom: 13
+  };
+
   return (
-    <Box w="55%" h="80vh">
+    <Box w="100%" h="50vh">
       <Map
         initialViewState={viewPort}
         mapStyle="mapbox://styles/mapbox/dark-v9"
