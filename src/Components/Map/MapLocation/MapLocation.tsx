@@ -55,7 +55,7 @@ export function MapLocation({
   }, []);
 
   return (
-    <Box w="55%" h="80vh" zIndex={2}>
+    <Box w="55%" h="80vh">
       <Map
         initialViewState={viewPort}
         mapStyle="mapbox://styles/mapbox/dark-v9"

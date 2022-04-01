@@ -34,6 +34,7 @@ export function SearchLocation({ updateLocation }: SearchLocationProps) {
       onSelect={handleOnSelect}
       onFocus={handleOnFocus}
       autoFocus
+      styling={{ zIndex: 3 }}
     />
   );
 }

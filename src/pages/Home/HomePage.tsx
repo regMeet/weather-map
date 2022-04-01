@@ -34,13 +34,10 @@ export function HomePage() {
       </Box>
 
       <Box width="50%">
-        {/* z-index not working */}
-        <Box zIndex={50}>
-          <SearchLocation updateLocation={setLocation} />
-        </Box>
+        <SearchLocation updateLocation={setLocation} />
 
         {location && (
-          <Flex zIndex={1}>
+          <Flex>
             <MapLocation location={location} updateLocation={setLocation} draggable />
             <Weather location={location} />
           </Flex>
