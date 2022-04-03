@@ -14,6 +14,29 @@ import {
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { Link } from './Link';
 
+export enum WeatherLinks {
+  LOGIN = '/login',
+  SIGN_UP = '/signUp',
+  CURRENT_WEATHER = '/dashboard/showCurrentWeather',
+  FORECAST_WEATHER = '/dashboard/showForecastWeather'
+}
+
+interface NavItem {
+  label: string;
+  href: string;
+}
+
+const NAV_ITEMS: Array<NavItem> = [
+  {
+    label: 'Show current weather',
+    href: WeatherLinks.CURRENT_WEATHER
+  },
+  {
+    label: 'Show forecast weather',
+    href: WeatherLinks.FORECAST_WEATHER
+  }
+];
+
 export function NavigationHeader() {
   const { isOpen, onToggle } = useDisclosure();
 
@@ -57,7 +80,7 @@ export function NavigationHeader() {
         </Flex>
 
         <Stack flex={{ base: 1, md: 0 }} justify="flex-end" direction="row" spacing={6}>
-          <Button as="a" fontSize="sm" fontWeight={400} variant="link" href="#">
+          <Button as="a" fontSize="sm" fontWeight={400} variant="link" href={WeatherLinks.LOGIN}>
             Sign In
           </Button>
           <Button
@@ -67,7 +90,7 @@ export function NavigationHeader() {
             fontWeight={600}
             color="white"
             bg="pink.400"
-            href="#"
+            href={WeatherLinks.SIGN_UP}
             _hover={{
               bg: 'pink.300'
             }}
@@ -123,19 +146,3 @@ const MobileNavItem = ({ label, href }: NavItem) => (
     </Flex>
   </Stack>
 );
-
-interface NavItem {
-  label: string;
-  href: string;
-}
-
-const NAV_ITEMS: Array<NavItem> = [
-  {
-    label: 'Show current weather',
-    href: '/showCurrentWeather'
-  },
-  {
-    label: 'Show forecast weather',
-    href: '/showForecastWeather'
-  }
-];

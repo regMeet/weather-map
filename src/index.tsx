@@ -4,10 +4,9 @@ import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import reportWebVitals from './reportWebVitals';
-import { CurrentWeatherPage } from './pages/Routes/CurrentWeatherPage';
-import { ForecastWeatherPage } from './pages/Routes/ForecastWeatherPage';
-import { HomePage } from './pages/Routes/HomePage';
-import { NavigationHeader } from './pages/Common/NavigationHeader';
+import { LoginPage } from './pages/Routes/LoginPage';
+import { SignUpPage } from './pages/Routes/SignUpPage';
+import { DashboardPage } from './pages/Routes/DashboardPage';
 
 // FixMe: not working
 export const theme = extendTheme({
@@ -34,12 +33,14 @@ ReactDOM.render(
   <React.StrictMode>
     <ChakraProvider>
       <BrowserRouter>
-        <NavigationHeader />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="showCurrentWeather" element={<CurrentWeatherPage />} />
-          <Route path="showForecastWeather" element={<ForecastWeatherPage />} />
-        </Routes>
+        <div className="main">
+          <Routes>
+            <Route path="/" element={<DashboardPage />} />
+            <Route path="login" element={<LoginPage />} />
+            <Route path="signUp" element={<SignUpPage />} />
+            <Route path="dashboard/*" element={<DashboardPage />} />
+          </Routes>
+        </div>
       </BrowserRouter>
     </ChakraProvider>
   </React.StrictMode>,
