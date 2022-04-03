@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box, Button, Flex, Text } from '@chakra-ui/react';
+import { Box, Flex, Text } from '@chakra-ui/react';
 
 import { GeoLocation } from '../../api/types';
 import { GetGeoLocation } from '../Map/GetGeoLocation';
@@ -11,24 +11,23 @@ export function ShowWeather() {
   const [location, setLocation] = useState<GeoLocation | null>(null);
 
   return (
-    <Flex>
+    <Flex mt={5}>
       <Box width="50%">
-        <Flex>
+        <Flex h="50px" justify="space-evenly" align="center">
+          <Text fontSize="lg">Current location</Text>
+
           <GetGeoLocation setCurrentLocation={setCurrentLocation} />
-          <Button
-            colorScheme="blue"
-            width="200px"
-            onClick={() => setCurrentLocation(currentLocation)}
-          >
-            <Text fontSize="lg">Current location</Text>
-          </Button>
         </Flex>
 
-        <MapWeatherImages location={currentLocation} />
+        <Box pr={5} borderRight="2px" borderColor="gray.100">
+          <MapWeatherImages location={currentLocation} />
+        </Box>
       </Box>
 
       <Box width="50%">
-        <SearchLocation updateLocation={setLocation} />
+        <Box h="50px">
+          <SearchLocation updateLocation={setLocation} />
+        </Box>
 
         <MapWeatherImages location={location} />
       </Box>

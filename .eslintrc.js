@@ -56,6 +56,18 @@ module.exports = {
         custom: 'ignore',
         explicitSpread: 'enforce'
       }
-    ]
+    ],
+    'no-use-before-define': 'off',
+    '@typescript-eslint/no-use-before-define': 0,
+    'operator-linebreak': [
+      'error',
+      'after',
+      {
+        overrides: {
+          ':': 'before'
+        }
+      }
+    ],
+    'react/no-unused-prop-types': 0
   }
 };
