@@ -5,13 +5,11 @@ import { Box } from '@chakra-ui/react';
 
 import ControlPanel from './ControlPanel';
 import Pin from '../Pin';
+import { GeoLocation } from '../../../api/types';
 
 interface MapLocationProps {
-  location: {
-    lat: number;
-    lng: number;
-  };
-  updateLocation?: ({ lat, lng }) => void;
+  location: GeoLocation;
+  updateLocation?: (GeoLocation) => void;
   draggable?: boolean;
   debug?: boolean;
 }

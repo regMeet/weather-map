@@ -52,5 +52,22 @@ export const searchForecast = async ({ location, lat, lng }: WeatherServiceProps
     .get(`${API_URL}/data/2.5/forecast`, { params })
     .then(({ data }) => data);
 
-  return response;
+  const temps = response.list.map((item) => ({
+    date: item.dt,
+    temp: item.main.feels_like,
+    icon: item.weather[0].icon
+  }));
+
+  // const temps = response.list.reduce((filtered, item) => {
+  //   if (item.dt_txt.includes('03:00:00')) {
+  //     filtered.push({
+  //       date: item.dt,
+  //       temp: item.main.feels_like,
+  //       icon: item.weather[0].icon
+  //     });
+  //   }
+  //   return filtered;
+  // }, []);
+
+  return temps;
 };

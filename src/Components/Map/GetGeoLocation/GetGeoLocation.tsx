@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Flex, Button, Text } from '@chakra-ui/react';
+import { Button, Text } from '@chakra-ui/react';
 import useGeolocation from 'react-navigator-geolocation';
 
 interface GetGeoLocationProps {
@@ -25,11 +25,9 @@ export function GetGeoLocation({ setCurrentLocation }: GetGeoLocationProps) {
 
   if (!isEnabled) {
     return (
-      <Flex className="HomePage" direction="column">
-        <Button colorScheme="blue" width="200px" onClick={() => suppressRequest(false)}>
-          <Text fontSize="lg">Enable location</Text>
-        </Button>
-      </Flex>
+      <Button colorScheme="blue" width="200px" onClick={() => suppressRequest(false)}>
+        <Text fontSize="lg">Enable location</Text>
+      </Button>
     );
   }
 

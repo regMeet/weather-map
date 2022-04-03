@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-
 import {
   Box,
   Flex,
@@ -16,6 +14,7 @@ import {
   useDisclosure
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import { Link } from './Link';
 
 export function NavigationHeader() {
   const { isOpen, onToggle } = useDisclosure();
@@ -89,16 +88,13 @@ export function NavigationHeader() {
 
 // eslint-disable-next-line arrow-body-style
 const DesktopNav = () => {
-  // TODO: add hover
-  // const linkColor = useColorModeValue('gray.600', 'gray.200');
-  // const linkHoverColor = useColorModeValue('gray.100', 'white');
   return (
     <Stack direction="row" spacing={4}>
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
           <Popover trigger="hover" placement="bottom-start">
             <PopoverTrigger>
-              <Link to={navItem.href}>{navItem.label}</Link>
+              <Link href={navItem.href} label={navItem.label} />
             </PopoverTrigger>
           </Popover>
         </Box>
