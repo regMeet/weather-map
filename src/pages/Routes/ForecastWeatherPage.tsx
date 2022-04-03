@@ -32,18 +32,20 @@ export function ForecastWeatherPage() {
       <GetGeoLocation setCurrentLocation={setCurrentLocation} />
       {!currentLocation && (
         <Box ml={5} mt={5}>
-          <Text fontSize="lg">Loading forecast</Text>
+          <Text fontSize="lg">Loading forecast...</Text>
         </Box>
       )}
       {currentLocation && (
         <Box ml={5} mt={5}>
-          <Text fontSize="lg">Forecast for Current location</Text>
+          <Flex as={Text} fontSize="lg" justify="center">
+            Forecast for Current location
+          </Flex>
           <Box mt={5}>
             {forecast.map((t) => {
               const day = moment.unix(t.date).format('MMMM Do, HH:mm');
 
               return (
-                <Flex>
+                <Flex key={t.date}>
                   <Text mr={20}>{day}</Text>
                   <Text mr={5} w="100px">
                     Temp: {t.temp}

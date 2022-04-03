@@ -7,8 +7,6 @@ import {
   Stack,
   Collapse,
   Link as UILink,
-  Popover,
-  PopoverTrigger,
   useColorModeValue,
   useBreakpointValue,
   useDisclosure
@@ -92,11 +90,7 @@ const DesktopNav = () => {
     <Stack direction="row" spacing={4}>
       {NAV_ITEMS.map((navItem) => (
         <Box key={navItem.label}>
-          <Popover trigger="hover" placement="bottom-start">
-            <PopoverTrigger>
-              <Link href={navItem.href} label={navItem.label} />
-            </PopoverTrigger>
-          </Popover>
+          <Link href={navItem.href} label={navItem.label} />
         </Box>
       ))}
     </Stack>
