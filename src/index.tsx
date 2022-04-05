@@ -1,48 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ChakraProvider, extendTheme } from '@chakra-ui/react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 import reportWebVitals from './reportWebVitals';
-import { LoginPage } from './pages/Routes/LoginPage';
-import { SignUpPage } from './pages/Routes/SignUpPage';
-import { DashboardPage } from './pages/Routes/DashboardPage';
 
-// FixMe: not working
-export const theme = extendTheme({
-  components: {
-    Link: {
-      variants: {
-        // you can name it whatever you want
-        primary: ({ colorScheme = 'blue' }) => ({
-          color: `${colorScheme}.500`,
-          _hover: {
-            color: `${colorScheme}.400`
-          }
-        })
-      },
-      defaultProps: {
-        // you can name it whatever you want
-        variant: 'primary'
-      }
-    }
-  }
-});
+import { App } from './pages/Routes/App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ChakraProvider>
-      <BrowserRouter>
-        <div className="main">
-          <Routes>
-            <Route path="/" element={<DashboardPage />} />
-            <Route path="login" element={<LoginPage />} />
-            <Route path="signUp" element={<SignUpPage />} />
-            <Route path="dashboard/*" element={<DashboardPage />} />
-          </Routes>
-        </div>
-      </BrowserRouter>
-    </ChakraProvider>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

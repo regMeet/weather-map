@@ -19,7 +19,13 @@ export function CurrentWeatherPage() {
           <GetGeoLocation setCurrentLocation={setCurrentLocation} />
         </Flex>
 
-        <Box pr={5} borderRight="2px" borderColor="gray.100">
+        <Box
+          pr={5}
+          borderRight="2px"
+          borderColor="gray.100"
+          h="90%"
+          className="map-weather-images-container"
+        >
           <MapWeatherImages location={currentLocation} />
         </Box>
       </Box>

@@ -41,20 +41,21 @@ export function Weather({ location: { lat, lng } }: WeatherProps) {
   }, [lat, lng]);
 
   if (!weather) {
+    // TODO: add localization
     return <Text>Loading weather</Text>;
   }
 
   return (
     <Flex h="70%" justifyContent="space-around" alignItems="center" direction="column">
-      <Text fontSize="2xl">{weather.city}</Text>
-      <Text fontSize="xl">
+      <Text fontSize={['md', 'lg', '2xl']} color="primary">
+        {weather.city}
+      </Text>
+      <Text fontSize={['xs', 'xs', 'xs', 'sm', 'lg']}>
         {weather.temperatureC}°C ({weather.minTemp}°c - {weather.maxTemp}°c)
       </Text>
-      <Text>
-        <Image src={`http://openweathermap.org/img/w/${weather.icon}.png`} alt="weather icon" />
-      </Text>
-      <Text fontSize="xl">Sunrise: {weather.sunrise}</Text>
-      <Text fontSize="xl">Sunset: {weather.sunset}</Text>
+      <Image src={`http://openweathermap.org/img/w/${weather.icon}.png`} alt="weather icon" />
+      <Text fontSize={['xs', 'xs', 'sm', 'md', 'lg']}>Sunrise: {weather.sunrise}</Text>
+      <Text fontSize={['xs', 'xs', 'sm', 'md', 'lg']}>Sunset: {weather.sunset}</Text>
     </Flex>
   );
 }

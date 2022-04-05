@@ -61,7 +61,7 @@ export function MapLocation({
   };
 
   return (
-    <Box w="100%" h="50vh">
+    <Box w="100%" h="100vh">
       <Map
         initialViewState={viewPort}
         mapStyle="mapbox://styles/mapbox/dark-v9"

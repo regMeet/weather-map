@@ -35,7 +35,7 @@ export function CarrouselImages({ location: { lat, lng, name } }: CarrouselImage
     <Carousel centerMode centerSlidePercentage={31} infiniteLoop autoPlay interval={2000}>
       {photos.map(({ photoUrl, id }) => (
         <Box key={id} mx={5}>
-          <Image src={photoUrl} alt="" objectFit="cover" h="300px" />
+          <Image src={photoUrl} alt="" objectFit="cover" h="200px" />
         </Box>
       ))}
     </Carousel>
