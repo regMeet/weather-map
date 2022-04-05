@@ -13,13 +13,8 @@ import {
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
 import { Link } from './Link';
-
-export enum WeatherLinks {
-  LOGIN = '/login',
-  SIGN_UP = '/signUp',
-  CURRENT_WEATHER = '/dashboard/showCurrentWeather',
-  FORECAST_WEATHER = '/dashboard/showForecastWeather'
-}
+import { WeatherLinks } from './WeatherLinksEnum';
+import { Logo } from '../../Components/Common';
 
 interface NavItem {
   label: string;
@@ -71,7 +66,7 @@ export function NavigationHeader() {
             fontFamily="heading"
             color={useColorModeValue('gray.800', 'white')}
           >
-            Logo
+            <Logo size="1x" />
           </Text>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
