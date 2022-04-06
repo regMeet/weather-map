@@ -1,10 +1,10 @@
+import { useEffect, useState } from 'react';
 import moment from 'moment';
 import { Box, Flex, Image, Text } from '@chakra-ui/react';
 
-import { useEffect, useState } from 'react';
-import { GeoLocation } from '../../api/types';
-import { searchForecast } from '../../api/WeatherService';
-import { GetGeoLocation } from '../../Components/Map/GetGeoLocation';
+import { GeoLocation } from 'api/types';
+import { searchForecast } from 'api/WeatherService';
+import { GetGeoLocation } from 'components/Map/GetGeoLocation';
 
 interface ForecastWeather {
   date: number;

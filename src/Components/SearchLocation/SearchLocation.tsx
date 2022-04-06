@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { ReactSearchAutocomplete as SearchAutocomplete } from 'react-search-autocomplete';
 
-import { getLocations } from '../../api/MapService';
+import { getLocations } from 'api/MapService';
 
 export interface SearchLocationProps {
   updateLocation: ({ lat, lng }) => void;

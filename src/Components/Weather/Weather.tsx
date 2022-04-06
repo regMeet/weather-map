@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import moment from 'moment';
 import { Flex, Image, Text } from '@chakra-ui/react';
 
-import { searchWeather } from '../../api/WeatherService';
-import { GeoLocation } from '../../api/types';
+import { GeoLocation } from 'api/types';
+import { searchWeather } from 'api/WeatherService';
 
 interface WeatherProps {
   location: GeoLocation;

@@ -1,8 +1,9 @@
 import { AspectRatio, Box, HStack, VStack } from '@chakra-ui/react';
-import { GeoLocation } from '../../api/types';
-import { CarrouselImages } from '../CarrouselImages';
-import { MapLocation } from '../Map/MapLocation';
-import { Weather } from '../Weather';
+
+import { GeoLocation } from 'api/types';
+import { CarrouselImages } from 'components/CarrouselImages';
+import { MapLocation } from 'components/Map/MapLocation';
+import { Weather } from 'components/Weather';
 
 interface MapWeatherImagesProps {
   location: GeoLocation | null;

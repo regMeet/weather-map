@@ -1,3 +1,4 @@
+import { forwardRef, useRef } from 'react';
 import {
   FormControl,
   FormLabel,
@@ -10,15 +11,14 @@ import {
   useMergeRefs
 } from '@chakra-ui/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import * as React from 'react';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 const HiEye = () => <FontAwesomeIcon icon={faEye} />;
 const HiEyeOff = () => <FontAwesomeIcon icon={faEyeSlash} />;
 
-export const PasswordField = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+export const PasswordField = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const { isOpen, onToggle } = useDisclosure();
-  const inputRef = React.useRef<HTMLInputElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const mergeRef = useMergeRefs(inputRef, ref);
   const onClickReveal = () => {

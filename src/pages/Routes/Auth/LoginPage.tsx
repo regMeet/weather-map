@@ -17,8 +17,8 @@ import {
   useColorModeValue
 } from '@chakra-ui/react';
 
-import { WeatherLinks } from '../../Common/WeatherLinksEnum';
-import { GoogleIcon, Logo, PasswordField } from '../../../Components/Common';
+import { WeatherLinks } from 'pages/common/WeatherLinksEnum';
+import { GoogleIcon, Logo, PasswordField } from 'components/common';
 
 // TODO: disable button login / change color schema if it's not form valid
 export function LoginPage() {

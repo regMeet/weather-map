@@ -3,9 +3,10 @@ import Map, { Marker, NavigationControl } from 'react-map-gl';
 import type { MarkerDragEvent, LngLat } from 'react-map-gl';
 import { Box } from '@chakra-ui/react';
 
+import { GeoLocation } from 'api/types';
+
 import ControlPanel from './ControlPanel';
 import Pin from '../Pin';
-import { GeoLocation } from '../../../api/types';
 
 interface MapLocationProps {
   location: GeoLocation;
@@ -60,6 +61,7 @@ export function MapLocation({
     zoom: 13
   };
 
+  // TODO: change PIN icon
   return (
     <Box w="100%" h="100vh">
       <Map

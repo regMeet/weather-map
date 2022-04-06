@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Box, Flex, Text } from '@chakra-ui/react';
 
-import { GeoLocation } from '../../api/types';
-import { GetGeoLocation } from '../../Components/Map/GetGeoLocation';
-import { MapWeatherImages } from '../../Components/MapWeatherImages';
-import { SearchLocation } from '../../Components/SearchLocation';
+import { GeoLocation } from 'api/types';
+import { GetGeoLocation } from 'components/Map/GetGeoLocation';
+import { MapWeatherImages } from 'components/MapWeatherImages';
+import { SearchLocation } from 'components/SearchLocation';
 
 export function CurrentWeatherPage() {
   const [currentLocation, setCurrentLocation] = useState<GeoLocation | null>(null);

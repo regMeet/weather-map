@@ -2,10 +2,10 @@ import { Box, Image } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
-import { getLocationFromCoords } from '../../api/MapService';
 
-import { getPhotosFromLocation } from '../../api/PhotoService';
-import { GeoLocation } from '../../api/types';
+import { getLocationFromCoords } from 'api/MapService';
+import { getPhotosFromLocation } from 'api/PhotoService';
+import { GeoLocation } from 'api/types';
 
 interface CarrouselImagesProps {
   location: GeoLocation;

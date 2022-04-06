@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 
-import { NavigationHeader } from '../Common/NavigationHeader';
+import { NavigationHeader } from 'pages/common/NavigationHeader';
 import { CurrentWeatherPage } from './CurrentWeatherPage';
 import { ForecastWeatherPage } from './ForecastWeatherPage';
 

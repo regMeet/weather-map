@@ -1,5 +1,5 @@
 import { axiosClient } from '.';
-import { removeAccents } from '../Components/Util';
+import { removeAccents } from '../components/Util';
 
 const API_URL = 'http://api.openweathermap.org';
 

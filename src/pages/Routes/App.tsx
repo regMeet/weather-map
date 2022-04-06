@@ -7,7 +7,7 @@ import {
 } from '@chakra-ui/react';
 
 import { DashboardPage } from './DashboardPage';
-import { LoginPage, SignUpPage } from './Auth';
+import { LoginPage, SignUpPage } from './auth';
 
 export function App() {
   const border = '1px';

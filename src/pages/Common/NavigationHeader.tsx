@@ -8,13 +8,13 @@ import {
   Collapse,
   Link as UILink,
   useColorModeValue,
-  useBreakpointValue,
   useDisclosure
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import { Logo } from 'components/common';
+
 import { Link } from './Link';
 import { WeatherLinks } from './WeatherLinksEnum';
-import { Logo } from '../../Components/Common';
 
 interface NavItem {
   label: string;
@@ -61,13 +61,7 @@ export function NavigationHeader() {
           />
         </Flex>
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-          <Text
-            textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
-            fontFamily="heading"
-            color={useColorModeValue('gray.800', 'white')}
-          >
-            <Logo size="1x" />
-          </Text>
+          <Logo size="1x" />
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
             <DesktopNav />
