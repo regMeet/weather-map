@@ -2,14 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 
-import { App } from 'pages/routes/App';
+import { AppRoutes } from 'pages/routes/AppRoutes';
 import reportWebVitals from './reportWebVitals';
+
+// import i18n (needs to be bundled ;))
+import 'i18n/config';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <React.Suspense fallback="Loading...">
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
+    </React.Suspense>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -8,9 +8,12 @@ import {
   Collapse,
   Link as UILink,
   useColorModeValue,
-  useDisclosure
+  useDisclosure,
+  Select
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons';
+import { useTranslation } from 'react-i18next';
+
 import { Logo } from 'components/common';
 
 import { Link } from './Link';
@@ -33,6 +36,7 @@ const NAV_ITEMS: Array<NavItem> = [
 ];
 
 export function NavigationHeader() {
+  const { i18n } = useTranslation();
   const { isOpen, onToggle } = useDisclosure();
 
   return (
@@ -68,7 +72,16 @@ export function NavigationHeader() {
           </Flex>
         </Flex>
 
-        <Stack flex={{ base: 1, md: 0 }} justify="flex-end" direction="row" spacing={6}>
+        <Stack flex={{ base: 1, md: 0 }} justify="flex-end" direction="row" spacing={8}>
+          <Select
+            display={{ base: 'none', md: 'inline-flex' }}
+            placeholder="Language"
+            onChange={(e) => i18n.changeLanguage(e.target.value)}
+            defaultValue={i18n.language}
+          >
+            <option value="en">English</option>
+            <option value="es">Español</option>
+          </Select>
           <Button as="a" fontSize="sm" fontWeight={400} variant="link" href={WeatherLinks.LOGIN}>
             Sign In
           </Button>

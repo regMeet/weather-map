@@ -1,10 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
 
 import { NavigationHeader } from 'pages/common/NavigationHeader';
-import { CurrentWeatherPage } from './CurrentWeatherPage';
-import { ForecastWeatherPage } from './ForecastWeatherPage';
+import { CurrentWeatherPage } from 'pages/app/CurrentWeatherPage';
+import { ForecastWeatherPage } from 'pages/app/ForecastWeatherPage';
 
-export function DashboardPage() {
+export function DashboardRoutes() {
   return (
     <div>
       <NavigationHeader />

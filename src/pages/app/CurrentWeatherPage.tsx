@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Box, Flex, Text } from '@chakra-ui/react';
+import { useTranslation } from 'react-i18next';
 
 import { GeoLocation } from 'api/types';
 import { GetGeoLocation } from 'components/Map/GetGeoLocation';
@@ -7,6 +8,7 @@ import { MapWeatherImages } from 'components/MapWeatherImages';
 import { SearchLocation } from 'components/SearchLocation';
 
 export function CurrentWeatherPage() {
+  const { t } = useTranslation();
   const [currentLocation, setCurrentLocation] = useState<GeoLocation | null>(null);
   const [location, setLocation] = useState<GeoLocation | null>(null);
 
@@ -14,7 +16,7 @@ export function CurrentWeatherPage() {
     <Flex mt={5}>
       <Box width="50%">
         <Flex h="50px" justify="space-evenly" align="center">
-          <Text fontSize="lg">Current location</Text>
+          <Text fontSize="lg">{t('current.location')}</Text>
 
           <GetGeoLocation setCurrentLocation={setCurrentLocation} />
         </Flex>

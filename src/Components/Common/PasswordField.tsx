@@ -1,4 +1,5 @@
 import { forwardRef, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import {
   FormControl,
   FormLabel,
@@ -17,6 +18,7 @@ const HiEye = () => <FontAwesomeIcon icon={faEye} />;
 const HiEyeOff = () => <FontAwesomeIcon icon={faEyeSlash} />;
 
 export const PasswordField = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+  const { t } = useTranslation();
   const { isOpen, onToggle } = useDisclosure();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -30,7 +32,7 @@ export const PasswordField = forwardRef<HTMLInputElement, InputProps>((props, re
 
   return (
     <FormControl>
-      <FormLabel htmlFor="password">Password</FormLabel>
+      <FormLabel htmlFor="password">{t('login.password.field')}</FormLabel>
       <InputGroup>
         <InputRightElement>
           <IconButton

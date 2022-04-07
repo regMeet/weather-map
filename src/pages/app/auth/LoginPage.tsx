@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import {
   Box,
   Button,
@@ -22,9 +23,10 @@ import { GoogleIcon, Logo, PasswordField } from 'components/common';
 
 // TODO: disable button login / change color schema if it's not form valid
 export function LoginPage() {
+  const { t } = useTranslation();
+
   const [hasRememberMe, setRememberMe] = useState<boolean>(true);
 
-  const noAccountText = "Don't have an account?";
   return (
     <Container maxW="lg" py={{ base: '12', md: '24' }} px={{ base: '0', sm: '8' }}>
       <Stack spacing="8">
@@ -34,12 +36,12 @@ export function LoginPage() {
           </Flex>
           <Stack spacing={{ base: '2', md: '3' }} textAlign="center">
             <Heading size={useBreakpointValue({ base: 'xs', md: 'sm' })}>
-              Log in to your account
+              {t('login.title')}
             </Heading>
             <HStack spacing="1" justify="center">
-              <Text color="muted">{noAccountText}</Text>
+              <Text color="muted">{t('login.no-account.label')}</Text>
               <Button as="a" href={WeatherLinks.SIGN_UP} variant="link" colorScheme="blue">
-                Sign up
+                {t('login.sign-up.link')}
               </Button>
             </HStack>
           </Stack>
@@ -54,7 +56,7 @@ export function LoginPage() {
           <Stack spacing="6">
             <Stack spacing="5">
               <FormControl>
-                <FormLabel htmlFor="email">Email</FormLabel>
+                <FormLabel htmlFor="email">{t('login.email.field')}</FormLabel>
                 <Input id="email" type="email" />
               </FormControl>
               <PasswordField />
@@ -66,7 +68,7 @@ export function LoginPage() {
                   setRememberMe(e.target.checked);
                 }}
               >
-                Remember me
+                {t('login.remember-me.field')}
               </Checkbox>
               <Button
                 as="a"
@@ -75,14 +77,14 @@ export function LoginPage() {
                 colorScheme="blue"
                 size="sm"
               >
-                Forgot password?
+                {t('login.forgot-password.link')}
               </Button>
             </HStack>
             <Stack spacing="6">
-              <Button colorScheme="blue">Sign in</Button>
+              <Button colorScheme="blue">{t('login.sign-in.button.label')}</Button>
               <Button>
                 <GoogleIcon boxSize="5" marginInlineEnd={3} />
-                <Text>Sign in with Google</Text>
+                <Text>{t('login.google-sign-in.button.label')}</Text>
               </Button>
             </Stack>
           </Stack>

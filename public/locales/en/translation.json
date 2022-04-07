@@ -1,0 +1,13 @@
+{
+  "login": {
+    "title": "Log in to your account",
+    "no-account.label": "Don't have an account?",
+    "sign-up.link": "Sign up",
+    "forgot-password.link": "Forgot password?",
+    "email.field": "Email",
+    "password.field": "Password",
+    "remember-me.field": "Remember me",
+    "sign-in.button.label": "Sign in",
+    "google-sign-in.button.label": "Sign in with Google"
+  }
+}

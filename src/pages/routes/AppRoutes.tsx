@@ -1,18 +1,20 @@
 import { Routes, Route } from 'react-router-dom';
 import {
+  border,
   ChakraProvider,
   extendTheme,
   theme as baseTheme,
   useColorModeValue
 } from '@chakra-ui/react';
 
-import { DashboardPage } from './DashboardPage';
-import { LoginPage, SignUpPage } from './auth';
+// TODO: make it work
+// import { customTheme } from 'pages/common/customTheme';
 
-export function App() {
-  const border = '1px';
+import { LoginPage, SignUpPage } from 'pages/app/auth';
+import { DashboardRoutes } from './DashboardRoutes';
 
-  const theme = extendTheme({
+export function AppRoutes() {
+  const customTheme = extendTheme({
     colors: {
       primary: baseTheme.colors.red[500]
     },
@@ -42,13 +44,13 @@ export function App() {
   });
 
   return (
-    <ChakraProvider theme={theme}>
+    <ChakraProvider theme={customTheme}>
       <div className="main">
         <Routes>
-          <Route path="/" element={<DashboardPage />} />
+          <Route path="/" element={<DashboardRoutes />} />
           <Route path="login" element={<LoginPage />} />
           <Route path="signUp" element={<SignUpPage />} />
-          <Route path="dashboard/*" element={<DashboardPage />} />
+          <Route path="dashboard/*" element={<DashboardRoutes />} />
         </Routes>
       </div>
     </ChakraProvider>
